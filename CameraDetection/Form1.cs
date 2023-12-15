@@ -46,7 +46,7 @@ namespace CameraDetection
             }
             else
             {
-                MessageBox.Show("Can't connect to video device","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Can't connect to video device", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -79,6 +79,13 @@ namespace CameraDetection
                 pictureBox1.Image = Image.FromFile(DinoNoConnetion);
             }
             else { }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            pictureBox1.Image = Image.FromFile(DinoNoConnetion);
+            videoCaptureDevice.SignalToStop();
+            Thread.Sleep(500);
         }
     }
 }
