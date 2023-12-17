@@ -15,6 +15,7 @@ namespace CameraDetection
 
         FilterInfoCollection filterInfoCollection;
         VideoCaptureDevice videoCaptureDevice;
+        List<Image> CurrentImagesTaken = new List<Image>();
 
         // 
         string DinoNoConnetion = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, "resources\\NoConnectionDino.jpg");
@@ -23,6 +24,8 @@ namespace CameraDetection
         {
             // picture box settings 
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
 
@@ -71,7 +74,7 @@ namespace CameraDetection
             if (videoCaptureDevice != null && videoCaptureDevice.IsRunning == true)
             {
                 videoCaptureDevice.SignalToStop();
-                pictureBox1.Image = null;
+                pictureBox1.Image = Image.FromFile(DinoNoConnetion);
                 InitialiseWebCam();
             }
             else if (videoCaptureDevice == null)
@@ -85,7 +88,31 @@ namespace CameraDetection
         {
             pictureBox1.Image = Image.FromFile(DinoNoConnetion);
             videoCaptureDevice.SignalToStop();
-            Thread.Sleep(500);
+            Thread.Sleep(250);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            var TakenImage = pictureBox1.Image;
+            CurrentImagesTaken.Add(TakenImage);
+            pictureBox2.Image = TakenImage;
+
+        }
+
+        private void viewGalleryBTN_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        int ImagePageNumber = 0;
+        private void NextImgBTN_Click(object sender, EventArgs e)
+        {
+            if (ImagePageNumber != CurrentImagesTaken.Count)
+            {
+                pictureBox3.Image = CurrentImagesTaken[ImagePageNumber];
+                ImagePageNumber += 1;
+            }
         }
     }
 }
