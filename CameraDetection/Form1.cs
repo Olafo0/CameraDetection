@@ -2,6 +2,7 @@ using AForge.Video;
 using AForge.Video.DirectShow;
 using System;
 using System.Diagnostics;
+using System.Text;
 
 namespace CameraDetection
 {
@@ -10,12 +11,15 @@ namespace CameraDetection
         public Form1()
         {
             InitializeComponent();
+            Console.WriteLine($"{CurrentImagesTaken.Count}");
 
         }
 
         FilterInfoCollection filterInfoCollection;
         VideoCaptureDevice videoCaptureDevice;
         List<Image> CurrentImagesTaken = new List<Image>();
+
+        int ImagePageNumber = 0;
 
         // 
         string DinoNoConnetion = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, "resources\\NoConnectionDino.jpg");
@@ -24,7 +28,6 @@ namespace CameraDetection
         {
             // picture box settings 
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
@@ -95,23 +98,50 @@ namespace CameraDetection
         {
             var TakenImage = pictureBox1.Image;
             CurrentImagesTaken.Add(TakenImage);
-            pictureBox2.Image = TakenImage;
-
+            Console.WriteLine($"IMAGE TAKEN : {DateTime.Now}");
         }
 
+        Boolean PressedViewGallery = false;
         private void viewGalleryBTN_Click(object sender, EventArgs e)
         {
-
+            if (!PressedViewGallery)
+            {
+                GalleryPanel.Visible = true;
+                PressedViewGallery = true;
+                try
+                {
+                    pictureBox3.Image = CurrentImagesTaken[0];
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine($"ERROR : {ex.Message}");
+                }
+            }
+            else if (PressedViewGallery == true)
+            {
+                GalleryPanel.Visible = false;
+                PressedViewGallery = false;
+            }
         }
 
-
-        int ImagePageNumber = 0;
         private void NextImgBTN_Click(object sender, EventArgs e)
         {
             if (ImagePageNumber != CurrentImagesTaken.Count)
             {
+                Console.WriteLine($"Current Page on {ImagePageNumber} out of {CurrentImagesTaken.Count}");
                 pictureBox3.Image = CurrentImagesTaken[ImagePageNumber];
                 ImagePageNumber += 1;
+            }
+        }
+
+        private void BackImg_Click(object sender, EventArgs e)
+        {
+            if (ImagePageNumber != 0)
+            {
+                Console.WriteLine($"Current Page on {ImagePageNumber} out of {CurrentImagesTaken.Count}");
+                ImagePageNumber -= 1;
+                pictureBox3.Image = CurrentImagesTaken[ImagePageNumber];
+        
             }
         }
     }

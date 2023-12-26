@@ -31,15 +31,14 @@
             pictureBox1 = new PictureBox();
             AvailableCameras = new ComboBox();
             label1 = new Label();
-            pictureBox2 = new PictureBox();
             button4 = new Button();
             viewGalleryBTN = new Button();
-            panel1 = new Panel();
+            GalleryPanel = new Panel();
+            BackImg = new Button();
             pictureBox3 = new PictureBox();
             NextImgBTN = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            panel1.SuspendLayout();
+            GalleryPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
@@ -58,7 +57,7 @@
             AvailableCameras.FormattingEnabled = true;
             AvailableCameras.Location = new Point(50, 58);
             AvailableCameras.Name = "AvailableCameras";
-            AvailableCameras.Size = new Size(121, 23);
+            AvailableCameras.Size = new Size(121, 28);
             AvailableCameras.TabIndex = 1;
             AvailableCameras.SelectedValueChanged += AvailableCameras_SelectedValueChanged;
             // 
@@ -67,46 +66,50 @@
             label1.AutoSize = true;
             label1.Location = new Point(186, 63);
             label1.Name = "label1";
-            label1.Size = new Size(126, 15);
+            label1.Size = new Size(161, 20);
             label1.TabIndex = 2;
             label1.Text = "Selected video capture";
             // 
-            // pictureBox2
-            // 
-            pictureBox2.Location = new Point(589, 32);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(161, 105);
-            pictureBox2.TabIndex = 3;
-            pictureBox2.TabStop = false;
-            // 
             // button4
             // 
-            button4.Location = new Point(567, 179);
+            button4.Location = new Point(50, 385);
             button4.Name = "button4";
             button4.Size = new Size(105, 38);
             button4.TabIndex = 4;
-            button4.Text = "button4";
+            button4.Text = "Take Image";
             button4.UseVisualStyleBackColor = true;
             button4.Click += button4_Click;
             // 
             // viewGalleryBTN
             // 
-            viewGalleryBTN.Location = new Point(287, 415);
+            viewGalleryBTN.Location = new Point(161, 385);
             viewGalleryBTN.Name = "viewGalleryBTN";
-            viewGalleryBTN.Size = new Size(87, 23);
+            viewGalleryBTN.Size = new Size(121, 38);
             viewGalleryBTN.TabIndex = 5;
             viewGalleryBTN.Text = "View images";
             viewGalleryBTN.UseVisualStyleBackColor = true;
             viewGalleryBTN.Click += viewGalleryBTN_Click;
             // 
-            // panel1
+            // GalleryPanel
             // 
-            panel1.Controls.Add(pictureBox3);
-            panel1.Controls.Add(NextImgBTN);
-            panel1.Location = new Point(493, 223);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(278, 210);
-            panel1.TabIndex = 6;
+            GalleryPanel.Controls.Add(BackImg);
+            GalleryPanel.Controls.Add(pictureBox3);
+            GalleryPanel.Controls.Add(NextImgBTN);
+            GalleryPanel.Location = new Point(493, 223);
+            GalleryPanel.Name = "GalleryPanel";
+            GalleryPanel.Size = new Size(278, 210);
+            GalleryPanel.TabIndex = 6;
+            GalleryPanel.Visible = false;
+            // 
+            // BackImg
+            // 
+            BackImg.Location = new Point(41, 170);
+            BackImg.Name = "BackImg";
+            BackImg.Size = new Size(75, 23);
+            BackImg.TabIndex = 2;
+            BackImg.Text = "<-";
+            BackImg.UseVisualStyleBackColor = true;
+            BackImg.Click += BackImg_Click;
             // 
             // pictureBox3
             // 
@@ -118,7 +121,7 @@
             // 
             // NextImgBTN
             // 
-            NextImgBTN.Location = new Point(170, 174);
+            NextImgBTN.Location = new Point(160, 170);
             NextImgBTN.Name = "NextImgBTN";
             NextImgBTN.Size = new Size(75, 23);
             NextImgBTN.TabIndex = 0;
@@ -128,13 +131,12 @@
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(panel1);
+            Controls.Add(GalleryPanel);
             Controls.Add(viewGalleryBTN);
             Controls.Add(button4);
-            Controls.Add(pictureBox2);
             Controls.Add(label1);
             Controls.Add(AvailableCameras);
             Controls.Add(pictureBox1);
@@ -144,8 +146,7 @@
             FormClosing += Form1_FormClosing;
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            panel1.ResumeLayout(false);
+            GalleryPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -161,10 +162,10 @@
         private TextBox WidthTB;
         private Button button3;
         private Label label1;
-        private PictureBox pictureBox2;
         private Button button4;
         private Button viewGalleryBTN;
-        private Panel panel1;
+        private Panel GalleryPanel;
         private PictureBox pictureBox3;
+        private Button BackImg;
     }
 }
