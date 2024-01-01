@@ -37,9 +37,11 @@
             BackImg = new Button();
             pictureBox3 = new PictureBox();
             NextImgBTN = new Button();
+            pictureBox2 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             GalleryPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // pictureBox1
@@ -57,7 +59,7 @@
             AvailableCameras.FormattingEnabled = true;
             AvailableCameras.Location = new Point(50, 58);
             AvailableCameras.Name = "AvailableCameras";
-            AvailableCameras.Size = new Size(121, 28);
+            AvailableCameras.Size = new Size(121, 23);
             AvailableCameras.TabIndex = 1;
             AvailableCameras.SelectedValueChanged += AvailableCameras_SelectedValueChanged;
             // 
@@ -66,7 +68,7 @@
             label1.AutoSize = true;
             label1.Location = new Point(186, 63);
             label1.Name = "label1";
-            label1.Size = new Size(161, 20);
+            label1.Size = new Size(126, 15);
             label1.TabIndex = 2;
             label1.Text = "Selected video capture";
             // 
@@ -129,11 +131,20 @@
             NextImgBTN.UseVisualStyleBackColor = true;
             NextImgBTN.Click += NextImgBTN_Click;
             // 
+            // pictureBox2
+            // 
+            pictureBox2.Location = new Point(522, 57);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(193, 86);
+            pictureBox2.TabIndex = 7;
+            pictureBox2.TabStop = false;
+            // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(pictureBox2);
             Controls.Add(GalleryPanel);
             Controls.Add(viewGalleryBTN);
             Controls.Add(button4);
@@ -148,6 +159,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             GalleryPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -167,5 +179,6 @@
         private Panel GalleryPanel;
         private PictureBox pictureBox3;
         private Button BackImg;
+        private PictureBox pictureBox2;
     }
 }

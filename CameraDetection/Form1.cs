@@ -29,6 +29,7 @@ namespace CameraDetection
             // picture box settings 
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
 
@@ -112,7 +113,7 @@ namespace CameraDetection
                 {
                     pictureBox3.Image = CurrentImagesTaken[0];
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine($"ERROR : {ex.Message}");
                 }
@@ -126,11 +127,31 @@ namespace CameraDetection
 
         private void NextImgBTN_Click(object sender, EventArgs e)
         {
+            byte[] ImageData;
             if (ImagePageNumber != CurrentImagesTaken.Count)
             {
                 Console.WriteLine($"Current Page on {ImagePageNumber} out of {CurrentImagesTaken.Count}");
                 pictureBox3.Image = CurrentImagesTaken[ImagePageNumber];
                 ImagePageNumber += 1;
+
+
+                // creating the image into a byte
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    CurrentImagesTaken[ImagePageNumber].Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+
+                    ImageData = ms.ToArray();
+                    Console.WriteLine(ImageData);
+                }
+
+                // Creating the byte into an image
+                using (MemoryStream ms = new MemoryStream(ImageData))
+                {
+                    Image TempImage = Image.FromStream(ms);
+
+                    pictureBox2.Image = TempImage;
+
+                }
             }
         }
 
@@ -141,7 +162,7 @@ namespace CameraDetection
                 Console.WriteLine($"Current Page on {ImagePageNumber} out of {CurrentImagesTaken.Count}");
                 ImagePageNumber -= 1;
                 pictureBox3.Image = CurrentImagesTaken[ImagePageNumber];
-        
+
             }
         }
     }
